@@ -20,6 +20,6 @@ class VouchersController < ApplicationController
 
   private
   def voucher_params
-    params.require(:voucher).permit(:name, :tax_id, :tel)
+    params.require(:voucher).permit(:name, :tax_id, :tel, :user_id)
   end
 end
