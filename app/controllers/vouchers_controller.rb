@@ -6,13 +6,13 @@ class VouchersController < ApplicationController
   end
 
   def new
-    @voucher = Voucher.new
+    @voucher = current_user.vouchers.new
   end
 
   def create
     @voucher = current_user.vouchers.new(voucher_params)
     if  @voucher.save
-      redirect_to vouchers_path, notice: "已成功兌換，您的兌換券序號為"
+      redirect_to vouchers_path, notice: "已成功兌換，您的兌換券序號為#{@voucher.serial}"
     else
       render :new
     end 
@@ -20,6 +20,6 @@ class VouchersController < ApplicationController
 
   private
   def voucher_params
-    params.require(:voucher).permit(:name, :tax_id, :tel, :user_id)
+    params.require(:voucher).permit(:name, :tax_id, :tel, :user_id, :serial)
   end
 end

@@ -1,3 +1,10 @@
+<% if @voucher.errors.any?  %>
+  <ul>
+  <% @voucher.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
 <%= form_for(@voucher) do |form| %>
   <%= form.label :name, '公司名稱' %>
   <%= form.text_field :name %>
