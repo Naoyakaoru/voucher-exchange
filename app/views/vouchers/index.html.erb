@@ -1,6 +1,20 @@
-<% @vouchers.each do |voucher| %>
-  <%= voucher.name %>
-  <%= voucher.tax_id %>
-  <%= voucher.tel %>
-  <%= voucher.serial %>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>公司名稱</th>
+      <th>統一編號</th>
+      <th>聯絡電話</th>
+      <th>兌換券序號</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vouchers.each do |voucher| %>
+      <tr>
+        <td><%= voucher.name %></td>
+        <td><%= voucher.tax_id %></td>
+        <td><%= voucher.tel %></td>
+        <td><%= voucher.serial %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
