@@ -1,8 +1,14 @@
 class Voucher < ApplicationRecord
   belongs_to :user
 
-  validates :name, :tax_id, :tel, :presence => { :message => "不能為空白" }
-  validates :tax_id, length: { is: 8 }, uniqueness: true
+  validates :name, :presence => { :message => "公司名稱不能為空白" }
+  validates :tax_id, :presence => { :message => "統一編號不能為空白" }
+  validates :tel, :presence => { :message => "聯絡電話不能為空白" }
+  validates :tax_id,
+            length: { 
+              is: 8, 
+              message: "統一編號請輸入8碼數字"
+            }
   validates :serial, uniqueness: true
   validate :valid_tax_id
   
@@ -14,6 +20,9 @@ class Voucher < ApplicationRecord
   end
 
   def valid_tax_id
+    if tax_id == ''
+      return
+    end
     multiplier = [1, 2, 1, 2, 1, 2, 4, 1].freeze
     serial = tax_id.split('')
 
