@@ -1,11 +1,11 @@
 <% if @voucher.errors.any?  %>
   <ul>
-  <% @voucher.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+  <% @voucher.errors.messages.each do |msg| %>
+    <li><%= msg[1][0] %></li>
   <% end %>
   </ul>
 <% end %>
-<%= form_for(@voucher) do |form| %>
+<%= form_for(@voucher, url: {action: "create"}) do |form| %>
   <%= form.label :name, '公司名稱' %>
   <%= form.text_field :name %>
   <%= form.label :tax_id, '統一編號' %>
