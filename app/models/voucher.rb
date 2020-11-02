@@ -30,7 +30,7 @@ class Voucher < ApplicationRecord
     multipled_reduced = multipled.map{|x|x.divmod(10).reduce(:+)}
     if multipled_reduced[6] == 10
       other_sum = multipled_reduced[0..5].reduce(:+)+multipled_reduced[7]
-      if other_sum != 0 || other_sum+1 != 0
+      if other_sum%10 != 0 && (other_sum+1)%10 != 0
         errors.add(:tax_id, "您所填寫的統一編號有誤，請確認後重新輸入")
       end
     else
