@@ -1,1 +1,9 @@
-<%= link_to 'Sign up', new_user_registration_path %>
+<% if current_user %>
+  <%= link_to '兌換復興券', exchange_path %>
+  <%= link_to '查看我已兌換的復興券', vouchers_path %>
+<% else %>
+  <%= link_to '註冊', new_user_registration_path %>
+  <%= link_to '登入', new_user_session_path %>
+<% end %>
+
+<h1>復興券兌換系統</h1>

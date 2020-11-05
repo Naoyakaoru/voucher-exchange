@@ -12,5 +12,6 @@
   <%= form.number_field :tax_id %>
   <%= form.label :tel, '聯絡電話' %>
   <%= form.text_field :tel %>
-  <%= form.submit :submit %>
+  <%= form.submit '送出' %>
 <% end %>
+<%= link_to '查看我已兌換的復興券', vouchers_path %>
