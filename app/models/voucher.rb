@@ -10,7 +10,7 @@ class Voucher < ApplicationRecord
               message: "統一編號請輸入8碼數字"
             }
   validates :serial, uniqueness: true
-  validate :valid_tax_id
+  validate :valid_tax_id, :valid_uniquness
   
   before_create :create_serial
 
@@ -20,7 +20,7 @@ class Voucher < ApplicationRecord
   end
 
   def valid_tax_id
-    if tax_id == ''
+    if tax_id == '' || !tax_id.match(/^\d{8}$/)
       return
     end
     multiplier = [1, 2, 1, 2, 1, 2, 4, 1].freeze
@@ -37,6 +37,13 @@ class Voucher < ApplicationRecord
       if multipled_reduced.reduce(:+)%10 != 0
         errors.add(:tax_id, "您所填寫的統一編號有誤，請確認後重新輸入")
       end
+    end
+  end
+
+  def valid_uniquness
+    created_voucher = Voucher.find_by(tax_id: tax_id)
+    if created_voucher
+      errors.add(:tax_id, "您已於#{created_voucher.created_at.strftime('%Y年 %m月 %d日')}兌換過")
     end
   end
 end
