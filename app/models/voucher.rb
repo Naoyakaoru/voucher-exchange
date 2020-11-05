@@ -20,7 +20,7 @@ class Voucher < ApplicationRecord
   end
 
   def valid_tax_id
-    if tax_id == ''
+    if tax_id == '' || !tax_id.match(/^\d{8}$/)
       return
     end
     multiplier = [1, 2, 1, 2, 1, 2, 4, 1].freeze
